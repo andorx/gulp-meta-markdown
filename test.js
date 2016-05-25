@@ -1,29 +1,36 @@
 'use strict';
 var assert = require('assert');
 var gutil = require('gulp-util');
-var markdown = require('./');
+var metaMarkdown = require('./');
 
 it('should compile Markdown to HTML', function (cb) {
-	var stream = markdown();
+	var stream = metaMarkdown();
 
 	stream.once('data', function (file) {
+		var fileContents = JSON.parse(file.contents);
+
 		assert.equal(file.relative, 'fixture.html');
-		assert.equal(file.contents.toString(), '<p><em>foo</em></p>\n');
+		assert.equal(fileContents.meta.title, 'lorem');
+		assert.equal(fileContents.meta.image, 'https://unsplash.com/photos/HyZJQ1OqE8M');
 	});
 
 	stream.on('end', cb);
 
 	stream.write(new gutil.File({
 		path: 'fixture.md',
-		contents: new Buffer('*foo*')
+		contents: new Buffer(`---
+title: lorem
+image: https://unsplash.com/photos/HyZJQ1OqE8M
+---
+			### Heading`)
 	}));
 
 	stream.end();
 });
 
 it('should expose the marked object', function(){
-	assert.ok(markdown.marked);
-	assert.ok(markdown.marked.Renderer);
-	assert.ok(markdown.marked.lexer);
-	assert.ok(markdown.marked.parser);
+	assert.ok(metaMarkdown.marked);
+	assert.ok(metaMarkdown.marked.Renderer);
+	assert.ok(metaMarkdown.marked.lexer);
+	assert.ok(metaMarkdown.marked.parser);
 })

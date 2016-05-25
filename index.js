@@ -4,29 +4,66 @@ var through = require('through2');
 var marked = require('marked');
 
 module.exports = function (options) {
-	return through.obj(function (file, enc, cb) {
+	return through.obj(function (file, enc, callback) {
 		if (file.isNull()) {
-			cb(null, file);
+			callback(null, file);
 			return;
 		}
 
 		if (file.isStream()) {
-			cb(new gutil.PluginError('gulp-markdown', 'Streaming not supported'));
+			callback(new gutil.PluginError('gulp-meta-markdown', 'Streaming not supported'));
 			return;
 		}
 
-		marked(file.contents.toString(), options, function (err, data) {
+		return explodeContent(file.contents.toString(), function(err, result) {
 			if (err) {
-				cb(new gutil.PluginError('gulp-markdown', err, {fileName: file.path}));
+				callback(new gutil.PluginError('gulp-meta-markdown', err, { fileName: file.path }));
 				return;
 			}
 
-			file.contents = new Buffer(data);
+			file.contents = new Buffer(JSON.stringify(result));
 			file.path = gutil.replaceExtension(file.path, '.html');
 
-			cb(null, file);
+			callback(null, file);
 		});
 	});
+
+	function explodeContent(content, callback) {
+		var pattern = /\n-{3}/g,
+				metadata = pattern.exec(content);
+
+		if (content.slice(0, 3) !== '---' || !metadata) {
+			marked(content, options, function(err, data) {
+				console.log(data);
+				callback(err, {
+					html: data
+				});
+			});
+			return;
+		}
+
+		marked(content.slice(pattern.lastIndex), options, function(err, data) {
+			console.log(data);
+			callback(err, {
+				meta: parseMetadata(content.slice(4, metadata.index)),
+				html: data
+			});
+		});
+	}
+
+	function parseMetadata(metadata) {
+		var result = {};
+
+		metadata.split('\n').forEach(function(pair) {
+			var keyValuePair = pair.split(/:[^\/]/);
+
+			if (keyValuePair[0] && keyValuePair[1]) {
+				result[keyValuePair[0]] = keyValuePair[1].trim();
+			}
+		});
+
+		return result;
+	}
 };
 
 module.exports.marked = marked;
