@@ -34,7 +34,6 @@ module.exports = function (options) {
 
 		if (content.slice(0, 3) !== '---' || !metadata) {
 			marked(content, options, function(err, data) {
-				console.log(data);
 				callback(err, {
 					html: data
 				});
@@ -43,7 +42,6 @@ module.exports = function (options) {
 		}
 
 		marked(content.slice(pattern.lastIndex), options, function(err, data) {
-			console.log(data);
 			callback(err, {
 				meta: parseMetadata(content.slice(4, metadata.index)),
 				html: data
