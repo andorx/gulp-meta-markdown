@@ -8,7 +8,7 @@
 ## Install
 
 ```
-$ npm install --save-dev gulp-markdown
+$ npm install --save-dev https://github.com/andorx/gulp-meta-markdown.git
 ```
 
 
@@ -16,11 +16,11 @@ $ npm install --save-dev gulp-markdown
 
 ```js
 var gulp = require('gulp');
-var markdown = require('gulp-markdown');
+var metaMarkdown = require('gulp-meta-markdown');
 
 gulp.task('default', function () {
 	return gulp.src('intro.md')
-		.pipe(markdown())
+		.pipe(metaMarkdown())
 		.pipe(gulp.dest('dist'));
 });
 ```
