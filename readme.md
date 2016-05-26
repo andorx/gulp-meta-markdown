@@ -1,4 +1,4 @@
-# gulp-markdown [![Build Status](https://travis-ci.org/sindresorhus/gulp-markdown.svg?branch=master)](https://travis-ci.org/sindresorhus/gulp-markdown)
+# gulp-meta-markdown [![Build Status](https://travis-ci.org/andorx/gulp-meta-markdown.svg?branch=master)](https://travis-ci.org/andorx/gulp-meta-markdown)
 
 > Markdown to HTML with [marked](https://github.com/chjj/marked)
 
@@ -13,6 +13,13 @@ $ npm install --save-dev https://github.com/andorx/gulp-meta-markdown.git
 
 
 ## Usage
+
+```intro.md
+---
+title: Lorem ipsum dolor sit amet
+---
+# Heading
+```
 
 ```js
 var gulp = require('gulp');
