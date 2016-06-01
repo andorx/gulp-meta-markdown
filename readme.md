@@ -28,7 +28,12 @@ var metaMarkdown = require('gulp-meta-markdown');
 gulp.task('default', function () {
 	return gulp.src('intro.md')
 		.pipe(metaMarkdown())
-		.pipe(gulp.dest('dist'));
+		.pipe(data(function(file) {
+			var fileContents = JSON.parse(file.contents);
+
+			// fileContents.meta
+			// fileContents.html
+		}));
 });
 ```
 
