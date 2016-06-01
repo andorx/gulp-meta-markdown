@@ -1,6 +1,6 @@
 {
   "name": "gulp-meta-marked",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Gulp Markdown Plugin (supported metadata)",
   "license": "MIT",
   "repository": "andorx/gulp-meta-markdown",

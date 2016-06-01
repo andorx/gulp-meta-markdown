@@ -8,7 +8,7 @@
 ## Install
 
 ```
-$ npm install --save-dev https://github.com/andorx/gulp-meta-markdown.git
+$ npm install --save-dev gulp-meta-marked
 ```
 
 
