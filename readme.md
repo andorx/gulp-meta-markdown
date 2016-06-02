@@ -1,4 +1,4 @@
-# gulp-meta-markdown [![Build Status](https://travis-ci.org/andorx/gulp-meta-markdown.svg?branch=master)](https://travis-ci.org/andorx/gulp-meta-markdown)
+# gulp-meta-marked [![Build Status](https://travis-ci.org/andorx/gulp-meta-marked.svg?branch=master)](https://travis-ci.org/andorx/gulp-meta-marked)
 
 > Markdown to HTML with [marked](https://github.com/chjj/marked)
 
