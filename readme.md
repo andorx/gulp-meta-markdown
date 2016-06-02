@@ -23,7 +23,7 @@ title: Lorem ipsum dolor sit amet
 
 ```js
 var gulp = require('gulp');
-var metaMarkdown = require('gulp-meta-markdown');
+var metaMarkdown = require('gulp-meta-marked');
 
 gulp.task('default', function () {
 	return gulp.src('intro.md')

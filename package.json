@@ -3,7 +3,7 @@
   "version": "0.1.2",
   "description": "Gulp Markdown Plugin (supported metadata)",
   "license": "MIT",
-  "repository": "andorx/gulp-meta-markdown",
+  "repository": "andorx/gulp-meta-marked",
   "author": {
     "name": "Duc N. PHAM",
     "email": "pngduc@gmail.com"
